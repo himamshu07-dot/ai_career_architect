@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/api/:match*",
-      "destination": "https://ai-career-architect-1yvj.onrender.com/api/:match*"
+      "destination": "https://ai-career-architect-2na1.onrender.com/"
     },
     {
       "source": "/(.*)",
