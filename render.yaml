@@ -10,3 +10,14 @@ services:
         sync: false
       - key: ALLOWED_ORIGINS
         value: "*"
+
+  - type: web
+    name: ai-career-frontend
+    runtime: static
+    rootDir: frontend
+    buildCommand: "npm install && npm run build"
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        sync: false
+

@@ -850,8 +850,9 @@ export default function App() {
     setError(null);
     setRoadmap(null);
     try {
-      // Make a request to the backend API via proxy
-      const res = await fetch("/api/generate-roadmap", {
+      // Make a request to the backend API via proxy or direct URL
+      const apiBase = import.meta.env.VITE_API_URL || "";
+      const res = await fetch(`${apiBase}/api/generate-roadmap`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
