@@ -26,7 +26,7 @@ if not GEMINI_API_KEY:
 genai.configure(api_key=GEMINI_API_KEY)
 MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-3.6-flash")
 
-# Comma-separated list of allowed origins, e.g. "http://localhost:5173,https://yourapp.com"
+
 ALLOWED_ORIGINS = [
     origin.strip()
     for origin in os.getenv("ALLOWED_ORIGINS", "http://localhost:5173").split(",")
@@ -47,9 +47,9 @@ app.add_middleware(
 class RoadmapRequest(BaseModel):
     current_role: str
     target_role: str
-    experience_level: Optional[str] = "beginner"  # beginner | intermediate | advanced
+    experience_level: Optional[str] = "beginner"  
     hours_per_week: Optional[int] = 10
-    focus_areas: Optional[str] = None  # free-text, e.g. "backend, ML"
+    focus_areas: Optional[str] = None  
 
 
 class RoadmapResponse(BaseModel):
@@ -393,14 +393,12 @@ def generate_roadmap(req: RoadmapRequest):
             detail="Model did not return valid JSON. Try again.",
         )
 
-    # Extract week themes to personalize YouTube recommendations
     week_themes = []
     if isinstance(roadmap.get("weeks"), list):
         for w in roadmap["weeks"]:
             if isinstance(w, dict) and w.get("theme"):
                 week_themes.append(w["theme"])
 
-    # Fetch suggested YouTube playlists and videos tailored to targets and time
     youtube_resources = fetch_youtube_resources(
         target_role=req.target_role,
         current_role=req.current_role,
